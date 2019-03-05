@@ -1,0 +1,601 @@
+fileFormatVersion: 2
+guid: 62ed4a52f24fd7140ade0efabe70340a
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Circle001
+    100002: Circle002
+    100004: Circle003
+    100006: Dragon_Low_Poly
+    100008: //RootNode
+    100010: Drazilla_Low_Poly
+    100012: English Dragon
+    100014: English Dragon 1
+    100016: English DragonAnkleBone001
+    100018: English DragonAnkleBone001 1
+    100020: English DragonAnkleBone001Bone001
+    100022: English DragonAnkleBone001Bone001 1
+    100024: English DragonAnkleBone001Bone001Bone001
+    100026: English DragonAnkleBone001Bone001Bone001 1
+    100028: English DragonBone001
+    100030: English DragonHead
+    100032: English DragonHead 1
+    100034: English DragonHeadBone001
+    100036: English DragonHeadBone001Bone001
+    100038: English DragonHeadBone001Bone001 1
+    100040: English DragonHeadBone001Bone001Bone001
+    100042: English DragonHeadBone001Bone001Bone001 1
+    100044: English DragonHeadBone001Bone001Bone001Bone001
+    100046: English DragonHeadBone001Bone001Bone001Bone001 1
+    100048: English DragonHeadBone001Bone001Bone001Bone001Bone001
+    100050: English DragonHeadBone001Bone001Bone001Bone001Bone001 1
+    100052: English DragonHeadBone001Bone001Bone001Bone001Bone001Bone002
+    100054: English DragonHeadBone001Bone001Bone001Bone001Bone001Bone002 1
+    100056: English DragonHeadBone001Bone001Bone001Bone001Bone001Bone002Bone001
+    100058: English DragonHeadBone001Bone001Bone001Bone001Bone001Bone002Bone001 1
+    100060: English DragonHeadBone002
+    100062: English DragonHeadBone002 1
+    100064: English DragonHeadBone002Bone001
+    100066: English DragonHeadBone002Bone001 1
+    100068: English DragonHeadBone002Bone001Bone001
+    100070: English DragonHeadBone002Bone001Bone001 1
+    100072: English DragonHeadBone002Bone001Bone001Bone001
+    100074: English DragonHeadBone002Bone001Bone001Bone001 1
+    100076: English DragonHeadBone003
+    100078: English DragonHeadBone003 1
+    100080: English DragonHeadBone004
+    100082: English DragonLArm1
+    100084: English DragonLArm1 1
+    100086: English DragonLArm1 2
+    100088: English DragonLArm2
+    100090: English DragonLArm2 1
+    100092: English DragonLArm2 2
+    100094: English DragonLArmCollarbone
+    100096: English DragonLArmCollarbone 1
+    100098: English DragonLArmCollarbone 2
+    100100: English DragonLArmDigit11
+    100102: English DragonLArmDigit12
+    100104: English DragonLArmDigit13
+    100106: English DragonLArmDigit21
+    100108: English DragonLArmDigit21 1
+    100110: English DragonLArmDigit22
+    100112: English DragonLArmDigit22 1
+    100114: English DragonLArmDigit23
+    100116: English DragonLArmDigit23 1
+    100118: English DragonLArmDigit31
+    100120: English DragonLArmDigit31 1
+    100122: English DragonLArmDigit32
+    100124: English DragonLArmDigit32 1
+    100126: English DragonLArmDigit33
+    100128: English DragonLArmDigit33 1
+    100130: English DragonLArmDigit41
+    100132: English DragonLArmDigit41 1
+    100134: English DragonLArmDigit42
+    100136: English DragonLArmDigit42 1
+    100138: English DragonLArmDigit43
+    100140: English DragonLArmDigit43 1
+    100142: English DragonLArmIKTarget
+    100144: English DragonLArmPalm
+    100146: English DragonLArmPalm 1
+    100148: English DragonLArmPalm 2
+    100150: English DragonLLeg1
+    100152: English DragonLLeg1 1
+    100154: English DragonLLeg2
+    100156: English DragonLLeg2 1
+    100158: English DragonLLeg3
+    100160: English DragonLLeg3 1
+    100162: English DragonLLegAnkle
+    100164: English DragonLLegDigit01
+    100166: English DragonLLegDigit02
+    100168: English DragonLLegDigit03
+    100170: English DragonLLegDigit11
+    100172: English DragonLLegDigit11 1
+    100174: English DragonLLegDigit12
+    100176: English DragonLLegDigit12 1
+    100178: English DragonLLegDigit13
+    100180: English DragonLLegDigit13 1
+    100182: English DragonLLegDigit21
+    100184: English DragonLLegDigit21 1
+    100186: English DragonLLegDigit22
+    100188: English DragonLLegDigit22 1
+    100190: English DragonLLegDigit23
+    100192: English DragonLLegDigit23 1
+    100194: English DragonLLegDigit31
+    100196: English DragonLLegDigit32
+    100198: English DragonLLegDigit33
+    100200: English DragonLLegPalm
+    100202: English DragonLLegPlatform
+    100204: English DragonLLegPlatform 1
+    100206: English DragonPalmBone001
+    100208: English DragonPalmBone001 1
+    100210: English DragonPalmBone001 2
+    100212: English DragonPalmBone001 3
+    100214: English DragonPalmBone001Bone001
+    100216: English DragonPalmBone001Bone001 1
+    100218: English DragonPalmBone001Bone001Bone001
+    100220: English DragonPalmBone001Bone001Bone001 1
+    100222: English DragonPalmBone002
+    100224: English DragonPalmBone002 1
+    100226: English DragonPalmBone003
+    100228: English DragonPalmBone003 1
+    100230: English DragonPalmBone004
+    100232: English DragonPalmBone004 1
+    100234: English DragonPalmBone005
+    100236: English DragonPalmBone005 1
+    100238: English DragonPalmBone005Bone002
+    100240: English DragonPalmBone005Bone002 1
+    100242: English DragonPalmBone006
+    100244: English DragonPalmBone006 1
+    100246: English DragonPelvis
+    100248: English DragonPelvis 1
+    100250: English DragonRArm1
+    100252: English DragonRArm1 1
+    100254: English DragonRArm1 2
+    100256: English DragonRArm2
+    100258: English DragonRArm2 1
+    100260: English DragonRArm2 2
+    100262: English DragonRArmCollarbone
+    100264: English DragonRArmCollarbone 1
+    100266: English DragonRArmCollarbone 2
+    100268: English DragonRArmDigit11
+    100270: English DragonRArmDigit12
+    100272: English DragonRArmDigit13
+    100274: English DragonRArmDigit21
+    100276: English DragonRArmDigit21 1
+    100278: English DragonRArmDigit22
+    100280: English DragonRArmDigit22 1
+    100282: English DragonRArmDigit23
+    100284: English DragonRArmDigit23 1
+    100286: English DragonRArmDigit31
+    100288: English DragonRArmDigit31 1
+    100290: English DragonRArmDigit32
+    100292: English DragonRArmDigit32 1
+    100294: English DragonRArmDigit33
+    100296: English DragonRArmDigit33 1
+    100298: English DragonRArmDigit41
+    100300: English DragonRArmDigit41 1
+    100302: English DragonRArmDigit42
+    100304: English DragonRArmDigit42 1
+    100306: English DragonRArmDigit43
+    100308: English DragonRArmDigit43 1
+    100310: English DragonRArmIKTarget
+    100312: English DragonRArmIKTarget 1
+    100314: English DragonRArmPalm
+    100316: English DragonRArmPalm 1
+    100318: English DragonRArmPalm 2
+    100320: English DragonRibcage
+    100322: English DragonRibcage 1
+    100324: English DragonRLeg1
+    100326: English DragonRLeg1 1
+    100328: English DragonRLeg2
+    100330: English DragonRLeg2 1
+    100332: English DragonRLeg3
+    100334: English DragonRLeg3 1
+    100336: English DragonRLegAnkle
+    100338: English DragonRLegCollarbone
+    100340: English DragonRLegDigit01
+    100342: English DragonRLegDigit02
+    100344: English DragonRLegDigit03
+    100346: English DragonRLegDigit11
+    100348: English DragonRLegDigit11 1
+    100350: English DragonRLegDigit12
+    100352: English DragonRLegDigit12 1
+    100354: English DragonRLegDigit13
+    100356: English DragonRLegDigit13 1
+    100358: English DragonRLegDigit21
+    100360: English DragonRLegDigit21 1
+    100362: English DragonRLegDigit22
+    100364: English DragonRLegDigit22 1
+    100366: English DragonRLegDigit23
+    100368: English DragonRLegDigit23 1
+    100370: English DragonRLegDigit31
+    100372: English DragonRLegDigit32
+    100374: English DragonRLegDigit33
+    100376: English DragonRLegPalm
+    100378: English DragonRLegPlatform
+    100380: English DragonRLegPlatform 1
+    100382: English DragonSpine1
+    100384: English DragonSpine1 1
+    100386: English DragonSpine1 2
+    100388: English DragonSpine1 3
+    100390: English DragonSpine2
+    100392: English DragonSpine2 1
+    100394: English DragonSpine2 2
+    100396: English DragonSpine2 3
+    100398: English DragonSpine3
+    100400: English DragonSpine3 1
+    100402: English DragonSpine3 2
+    100404: English DragonSpine3 3
+    100406: English DragonSpine4
+    100408: English DragonSpine4 1
+    100410: English DragonSpine5
+    100412: English DragonSpine6
+    100414: English DragonTail1
+    100416: English DragonTail1 1
+    100418: English DragonTail2
+    100420: English DragonTail2 1
+    100422: English DragonTail3
+    100424: English DragonTail3 1
+    100426: English DragonTail4
+    100428: English DragonTail4 1
+    100430: English DragonTail5
+    100432: English DragonTail5 1
+    100434: English DragonTail6
+    100436: English DragonTail6 1
+    100438: English DragonTail7
+    100440: English DragonTail7 1
+    100442: English DragonTail8
+    100444: English DragonTail8 1
+    100446: Object001
+    100448: PhotometricLight002
+    100450: PhotometricLight003
+    100452: PhotometricLight004
+    100454: PhysCamera001
+    100456: PhysCamera002
+    100458: PhysCamera002.Target
+    100460: PhysCamera003
+    100462: PhysCamera003.Target
+    100464: PhysCamera004
+    100466: PhysCamera004.Target
+    100468: PhysCamera005
+    100470: PhysCamera005.Target
+    100472: PhysCamera006
+    100474: PhysCamera006.Target
+    100476: PhysCamera007
+    100478: PhysCamera007.Target
+    100480: Point001
+    100482: Point002
+    100484: Teeth_Tongue_Down
+    100486: Teeth_Up
+    100488: VRayLight001
+    100490: VRaySun001
+    100492: VRaySun001.Target
+    400000: Circle001
+    400002: Circle002
+    400004: Circle003
+    400006: Dragon_Low_Poly
+    400008: //RootNode
+    400010: Drazilla_Low_Poly
+    400012: English Dragon
+    400014: English Dragon 1
+    400016: English DragonAnkleBone001
+    400018: English DragonAnkleBone001 1
+    400020: English DragonAnkleBone001Bone001
+    400022: English DragonAnkleBone001Bone001 1
+    400024: English DragonAnkleBone001Bone001Bone001
+    400026: English DragonAnkleBone001Bone001Bone001 1
+    400028: English DragonBone001
+    400030: English DragonHead
+    400032: English DragonHead 1
+    400034: English DragonHeadBone001
+    400036: English DragonHeadBone001Bone001
+    400038: English DragonHeadBone001Bone001 1
+    400040: English DragonHeadBone001Bone001Bone001
+    400042: English DragonHeadBone001Bone001Bone001 1
+    400044: English DragonHeadBone001Bone001Bone001Bone001
+    400046: English DragonHeadBone001Bone001Bone001Bone001 1
+    400048: English DragonHeadBone001Bone001Bone001Bone001Bone001
+    400050: English DragonHeadBone001Bone001Bone001Bone001Bone001 1
+    400052: English DragonHeadBone001Bone001Bone001Bone001Bone001Bone002
+    400054: English DragonHeadBone001Bone001Bone001Bone001Bone001Bone002 1
+    400056: English DragonHeadBone001Bone001Bone001Bone001Bone001Bone002Bone001
+    400058: English DragonHeadBone001Bone001Bone001Bone001Bone001Bone002Bone001 1
+    400060: English DragonHeadBone002
+    400062: English DragonHeadBone002 1
+    400064: English DragonHeadBone002Bone001
+    400066: English DragonHeadBone002Bone001 1
+    400068: English DragonHeadBone002Bone001Bone001
+    400070: English DragonHeadBone002Bone001Bone001 1
+    400072: English DragonHeadBone002Bone001Bone001Bone001
+    400074: English DragonHeadBone002Bone001Bone001Bone001 1
+    400076: English DragonHeadBone003
+    400078: English DragonHeadBone003 1
+    400080: English DragonHeadBone004
+    400082: English DragonLArm1
+    400084: English DragonLArm1 1
+    400086: English DragonLArm1 2
+    400088: English DragonLArm2
+    400090: English DragonLArm2 1
+    400092: English DragonLArm2 2
+    400094: English DragonLArmCollarbone
+    400096: English DragonLArmCollarbone 1
+    400098: English DragonLArmCollarbone 2
+    400100: English DragonLArmDigit11
+    400102: English DragonLArmDigit12
+    400104: English DragonLArmDigit13
+    400106: English DragonLArmDigit21
+    400108: English DragonLArmDigit21 1
+    400110: English DragonLArmDigit22
+    400112: English DragonLArmDigit22 1
+    400114: English DragonLArmDigit23
+    400116: English DragonLArmDigit23 1
+    400118: English DragonLArmDigit31
+    400120: English DragonLArmDigit31 1
+    400122: English DragonLArmDigit32
+    400124: English DragonLArmDigit32 1
+    400126: English DragonLArmDigit33
+    400128: English DragonLArmDigit33 1
+    400130: English DragonLArmDigit41
+    400132: English DragonLArmDigit41 1
+    400134: English DragonLArmDigit42
+    400136: English DragonLArmDigit42 1
+    400138: English DragonLArmDigit43
+    400140: English DragonLArmDigit43 1
+    400142: English DragonLArmIKTarget
+    400144: English DragonLArmPalm
+    400146: English DragonLArmPalm 1
+    400148: English DragonLArmPalm 2
+    400150: English DragonLLeg1
+    400152: English DragonLLeg1 1
+    400154: English DragonLLeg2
+    400156: English DragonLLeg2 1
+    400158: English DragonLLeg3
+    400160: English DragonLLeg3 1
+    400162: English DragonLLegAnkle
+    400164: English DragonLLegDigit01
+    400166: English DragonLLegDigit02
+    400168: English DragonLLegDigit03
+    400170: English DragonLLegDigit11
+    400172: English DragonLLegDigit11 1
+    400174: English DragonLLegDigit12
+    400176: English DragonLLegDigit12 1
+    400178: English DragonLLegDigit13
+    400180: English DragonLLegDigit13 1
+    400182: English DragonLLegDigit21
+    400184: English DragonLLegDigit21 1
+    400186: English DragonLLegDigit22
+    400188: English DragonLLegDigit22 1
+    400190: English DragonLLegDigit23
+    400192: English DragonLLegDigit23 1
+    400194: English DragonLLegDigit31
+    400196: English DragonLLegDigit32
+    400198: English DragonLLegDigit33
+    400200: English DragonLLegPalm
+    400202: English DragonLLegPlatform
+    400204: English DragonLLegPlatform 1
+    400206: English DragonPalmBone001
+    400208: English DragonPalmBone001 1
+    400210: English DragonPalmBone001 2
+    400212: English DragonPalmBone001 3
+    400214: English DragonPalmBone001Bone001
+    400216: English DragonPalmBone001Bone001 1
+    400218: English DragonPalmBone001Bone001Bone001
+    400220: English DragonPalmBone001Bone001Bone001 1
+    400222: English DragonPalmBone002
+    400224: English DragonPalmBone002 1
+    400226: English DragonPalmBone003
+    400228: English DragonPalmBone003 1
+    400230: English DragonPalmBone004
+    400232: English DragonPalmBone004 1
+    400234: English DragonPalmBone005
+    400236: English DragonPalmBone005 1
+    400238: English DragonPalmBone005Bone002
+    400240: English DragonPalmBone005Bone002 1
+    400242: English DragonPalmBone006
+    400244: English DragonPalmBone006 1
+    400246: English DragonPelvis
+    400248: English DragonPelvis 1
+    400250: English DragonRArm1
+    400252: English DragonRArm1 1
+    400254: English DragonRArm1 2
+    400256: English DragonRArm2
+    400258: English DragonRArm2 1
+    400260: English DragonRArm2 2
+    400262: English DragonRArmCollarbone
+    400264: English DragonRArmCollarbone 1
+    400266: English DragonRArmCollarbone 2
+    400268: English DragonRArmDigit11
+    400270: English DragonRArmDigit12
+    400272: English DragonRArmDigit13
+    400274: English DragonRArmDigit21
+    400276: English DragonRArmDigit21 1
+    400278: English DragonRArmDigit22
+    400280: English DragonRArmDigit22 1
+    400282: English DragonRArmDigit23
+    400284: English DragonRArmDigit23 1
+    400286: English DragonRArmDigit31
+    400288: English DragonRArmDigit31 1
+    400290: English DragonRArmDigit32
+    400292: English DragonRArmDigit32 1
+    400294: English DragonRArmDigit33
+    400296: English DragonRArmDigit33 1
+    400298: English DragonRArmDigit41
+    400300: English DragonRArmDigit41 1
+    400302: English DragonRArmDigit42
+    400304: English DragonRArmDigit42 1
+    400306: English DragonRArmDigit43
+    400308: English DragonRArmDigit43 1
+    400310: English DragonRArmIKTarget
+    400312: English DragonRArmIKTarget 1
+    400314: English DragonRArmPalm
+    400316: English DragonRArmPalm 1
+    400318: English DragonRArmPalm 2
+    400320: English DragonRibcage
+    400322: English DragonRibcage 1
+    400324: English DragonRLeg1
+    400326: English DragonRLeg1 1
+    400328: English DragonRLeg2
+    400330: English DragonRLeg2 1
+    400332: English DragonRLeg3
+    400334: English DragonRLeg3 1
+    400336: English DragonRLegAnkle
+    400338: English DragonRLegCollarbone
+    400340: English DragonRLegDigit01
+    400342: English DragonRLegDigit02
+    400344: English DragonRLegDigit03
+    400346: English DragonRLegDigit11
+    400348: English DragonRLegDigit11 1
+    400350: English DragonRLegDigit12
+    400352: English DragonRLegDigit12 1
+    400354: English DragonRLegDigit13
+    400356: English DragonRLegDigit13 1
+    400358: English DragonRLegDigit21
+    400360: English DragonRLegDigit21 1
+    400362: English DragonRLegDigit22
+    400364: English DragonRLegDigit22 1
+    400366: English DragonRLegDigit23
+    400368: English DragonRLegDigit23 1
+    400370: English DragonRLegDigit31
+    400372: English DragonRLegDigit32
+    400374: English DragonRLegDigit33
+    400376: English DragonRLegPalm
+    400378: English DragonRLegPlatform
+    400380: English DragonRLegPlatform 1
+    400382: English DragonSpine1
+    400384: English DragonSpine1 1
+    400386: English DragonSpine1 2
+    400388: English DragonSpine1 3
+    400390: English DragonSpine2
+    400392: English DragonSpine2 1
+    400394: English DragonSpine2 2
+    400396: English DragonSpine2 3
+    400398: English DragonSpine3
+    400400: English DragonSpine3 1
+    400402: English DragonSpine3 2
+    400404: English DragonSpine3 3
+    400406: English DragonSpine4
+    400408: English DragonSpine4 1
+    400410: English DragonSpine5
+    400412: English DragonSpine6
+    400414: English DragonTail1
+    400416: English DragonTail1 1
+    400418: English DragonTail2
+    400420: English DragonTail2 1
+    400422: English DragonTail3
+    400424: English DragonTail3 1
+    400426: English DragonTail4
+    400428: English DragonTail4 1
+    400430: English DragonTail5
+    400432: English DragonTail5 1
+    400434: English DragonTail6
+    400436: English DragonTail6 1
+    400438: English DragonTail7
+    400440: English DragonTail7 1
+    400442: English DragonTail8
+    400444: English DragonTail8 1
+    400446: Object001
+    400448: PhotometricLight002
+    400450: PhotometricLight003
+    400452: PhotometricLight004
+    400454: PhysCamera001
+    400456: PhysCamera002
+    400458: PhysCamera002.Target
+    400460: PhysCamera003
+    400462: PhysCamera003.Target
+    400464: PhysCamera004
+    400466: PhysCamera004.Target
+    400468: PhysCamera005
+    400470: PhysCamera005.Target
+    400472: PhysCamera006
+    400474: PhysCamera006.Target
+    400476: PhysCamera007
+    400478: PhysCamera007.Target
+    400480: Point001
+    400482: Point002
+    400484: Teeth_Tongue_Down
+    400486: Teeth_Up
+    400488: VRayLight001
+    400490: VRaySun001
+    400492: VRaySun001.Target
+    2100000: 'Material #64'
+    2300000: Teeth_Tongue_Down
+    2300002: Teeth_Up
+    3300000: Teeth_Tongue_Down
+    3300002: Teeth_Up
+    4300000: Drazilla_Low_Poly
+    4300002: Dragon_Low_Poly
+    4300004: Teeth_Up
+    4300006: Teeth_Tongue_Down
+    7400000: Take 001
+    9500000: //RootNode
+    10800000: PhotometricLight002
+    10800002: PhotometricLight003
+    10800004: PhotometricLight004
+    13700000: Dragon_Low_Poly
+    13700002: Drazilla_Low_Poly
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.0254
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
