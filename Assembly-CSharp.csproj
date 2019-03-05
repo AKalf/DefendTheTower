@@ -75,6 +75,7 @@
     <Compile Include="Assets\Scripts\SquadScripts\SquadStats.cs" />
     <Compile Include="Assets\Scripts\SquadScripts\UnitScripts\UnitBehaviour.cs" />
     <Compile Include="Assets\Scripts\TowerScripts\TowerStatsScript.cs" />
+    <Compile Include="Assets\TestForGit.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>D:/Unity/Projects/DTT V.0/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
