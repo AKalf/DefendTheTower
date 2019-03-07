@@ -7,12 +7,15 @@ public class SquadBehaviour : MonoBehaviour
     NavMeshAgent thisAgent = null;
     Vector3 targetLanePos = Vector3.zero;
     SquadStats thisSquadStats = null;
+    SquadBehaviour enemyTargetedSquad = null;
 
-
-    enum SquadStates { Moving, Engaging, Idle }
+    public enum SquadStates { Moving, Engaging, WaitingToEngage }
     SquadStates currentState = SquadStates.Moving;
     bool init = false;
-
+    private void Awake()
+    {
+        thisAgent = GetComponent<NavMeshAgent>();
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +26,7 @@ public class SquadBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+
         if (init) {
             SetSquadState(SquadStates.Moving);
             init = false;
@@ -55,10 +58,12 @@ public class SquadBehaviour : MonoBehaviour
 
 
     private void SetSquadState(SquadStates state) {
+
         switch (state) {
-            case SquadStates.Idle:
+            case SquadStates.WaitingToEngage:
                 foreach (UnitBehaviour unit in GetSquadUnits()) {
-                    unit.SetUnitState(UnitBehaviour.UnitStates.Idle);
+                    unit.SetUnitState(UnitBehaviour.UnitStates.WaitingToEngage);
+                    thisAgent.isStopped = true;
                 }
                 break;
             case SquadStates.Moving:
@@ -68,37 +73,108 @@ public class SquadBehaviour : MonoBehaviour
                 }
                 break;
             case SquadStates.Engaging:
+                thisAgent.isStopped = true;
                 foreach (UnitBehaviour unit in GetSquadUnits())
                 {
-                    unit.SetUnitState(UnitBehaviour.UnitStates.Attacking);
+                    unit.SetUnitState(UnitBehaviour.UnitStates.Engaging);
                 }
                 break;
 
         }
         currentState = state;
     }
-
+    public SquadStates GetSquadState() {
+        return currentState;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        
-        //if (this.tag == "Sq2") {
-        //    if (other.GetComponent<SquadBehaviour>() != null && other.tag != this.tag) {
-        //        SquadBehaviour enemySquad = other.GetComponent<SquadBehaviour>();
-        //        SetSquadState(SquadStates.Engaging);
-        //        if (enemySquad.GetSquadUnits().Count > this.GetSquadUnits().Count) {
+        if (other.tag.StartsWith("Sq") && other.tag != this.tag) {
+            if (GetSquadState() == SquadStates.Moving)
+            {
+                SquadBehaviour enemySquad = other.GetComponent<SquadBehaviour>();
+                if (enemySquad.GetSquadState() == SquadStates.Moving)
+                {
+                    Debug.Log(gameObject.name + ": EnemySquad collided");
+                    // if this is Enemy squad 
+                    if (this.tag == "Sq2")
+                    {
+                        if (enemySquad.GetSquadUnits().Count <= this.GetSquadUnits().Count)
+                        {
+                            SetSquadTargets(enemySquad.GetSquadUnits());
+                            SetSquadState(SquadStates.Engaging);
+                            enemySquad.SetSquadState(SquadStates.WaitingToEngage);
 
-        //        }
+                        }
+                    }
+                    else if (this.tag == "Sq1")
+                    {
+                        if (this.GetSquadUnits().Count > enemySquad.GetSquadUnits().Count)
+                        {
+                            SetSquadTargets(enemySquad.GetSquadUnits());
+                            SetSquadState(SquadStates.Engaging);
+                            enemySquad.SetSquadState(SquadStates.WaitingToEngage);
+                        }
 
-
-
-        //    }
-        //}
+                    }
+                }
+            }
+        }
     }
 
     public List<UnitBehaviour> GetSquadUnits() {
         return thisSquadStats.GetSquadUnits();
     }
 
-    
+    public void SetSquadTarget(GameObject target) {
+        thisAgent.isStopped = true;
+        foreach (UnitBehaviour unit in GetSquadUnits()) {
+            NavMeshAgent unitNavMesh = unit.GetComponent<NavMeshAgent>();
+            if (unitNavMesh != null)
+            {
+                unitNavMesh.enabled = true;
+                unit.SetUnitCurrentTarget(target);  
+            }
+        }
+        SetSquadState(SquadStates.Engaging);
+    }
+    public void SetSquadTargets(List<GameObject> targets)
+    {
+        thisAgent.isStopped = true;
+        int index = 0;
+        foreach (UnitBehaviour unit in GetSquadUnits())
+        {
+            NavMeshAgent unitNavMesh = unit.GetComponent<NavMeshAgent>();
+            if (unitNavMesh != null)
+            {
+                unit.SetUnitCurrentTarget(targets[index]);               
+                index++;
+            }
+            if (index >= targets.Count) {
+                index = 0;
+            }
+        }
+        SetSquadState(SquadStates.Engaging);
+    }
+    public void SetSquadTargets(List<UnitBehaviour> targets)
+    {
+        thisAgent.isStopped = true;
+        int index = 0;
+        foreach (UnitBehaviour unit in GetSquadUnits())
+        {
+            NavMeshAgent unitNavMesh = unit.GetComponent<NavMeshAgent>();
+            if (unitNavMesh != null)
+            {              
+                unit.SetUnitCurrentTarget(targets[index].gameObject);
+               
+                index++;
+            }
+            if (index >= targets.Count)
+            {
+                index = 0;
+            }
+        }
+        SetSquadState(SquadStates.Engaging);
+    }
+
 }

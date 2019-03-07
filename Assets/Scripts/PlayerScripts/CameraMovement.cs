@@ -26,7 +26,7 @@ public class CameraMovement : MonoBehaviour {
     float rotAverageX = 0.0f;
     private List<float> rotArrayY = new List<float>();
     float rotAverageY = 0.0f;
-    public float frameCounter = 20;
+    public float frameCounter = 60;
     Quaternion originalRotation;
 
     Camera camera;
@@ -51,48 +51,107 @@ public class CameraMovement : MonoBehaviour {
             rotAverageY = 0f;
             rotAverageX = 0f;
 
+            float xInput = Input.GetAxis("Mouse Y");
+            float yInput = Input.GetAxis("Mouse X");
             //Gets rotational input from the mouse
-            rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
-            rotationX += Input.GetAxis("Mouse X") * sensitivityX;
+            rotationY += xInput * sensitivityY;
+            rotationX += yInput * sensitivityX;
+            //if (camera.fieldOfView < 90)
+            //{
+                //Adds the rotation values to their relative array
+                rotArrayY.Add(rotationY);
+                rotArrayX.Add(rotationX);
 
-            //Adds the rotation values to their relative array
-            rotArrayY.Add(rotationY);
-            rotArrayX.Add(rotationX);
+                //If the arrays length is bigger or equal to the value of frameCounter remove the first value in the array
+                if (rotArrayY.Count >= frameCounter)
+                {
+                    rotArrayY.RemoveAt(0);
+                }
+                if (rotArrayX.Count >= frameCounter)
+                {
+                    rotArrayX.RemoveAt(0);
+                }
 
-            //If the arrays length is bigger or equal to the value of frameCounter remove the first value in the array
-            if (rotArrayY.Count >= frameCounter)
-            {
-                rotArrayY.RemoveAt(0);
-            }
-            if (rotArrayX.Count >= frameCounter)
-            {
-                rotArrayX.RemoveAt(0);
-            }
+                //Adding up all the rotational input values from each array
+                for (int j = 0; j < rotArrayY.Count; j++)
+                {
+                    rotAverageY += rotArrayY[j];
+                }
+                for (int i = 0; i < rotArrayX.Count; i++)
+                {
+                    rotAverageX += rotArrayX[i];
+                }
 
-            //Adding up all the rotational input values from each array
-            for (int j = 0; j < rotArrayY.Count; j++)
-            {
-                rotAverageY += rotArrayY[j];
-            }
-            for (int i = 0; i < rotArrayX.Count; i++)
-            {
-                rotAverageX += rotArrayX[i];
-            }
+                //Standard maths to find the average
+                rotAverageY /= rotArrayY.Count;
+                rotAverageX /= rotArrayX.Count;
 
-            //Standard maths to find the average
-            rotAverageY /= rotArrayY.Count;
-            rotAverageX /= rotArrayX.Count;
+                //Clamp the rotation average to be within a specific value range
+                rotAverageY = ClampAngle(rotAverageY, minimumY, maximumY);
+                rotAverageX = ClampAngle(rotAverageX, minimumX, maximumX);
 
-            //Clamp the rotation average to be within a specific value range
-            rotAverageY = ClampAngle(rotAverageY, minimumY, maximumY);
-            rotAverageX = ClampAngle(rotAverageX, minimumX, maximumX);
+                //Get the rotation you will be at next as a Quaternion
+                Quaternion yQuaternion = Quaternion.AngleAxis(rotAverageY, Vector3.left);
+                Quaternion xQuaternion = Quaternion.AngleAxis(rotAverageX, Vector3.up);
+                //Rotate
+                transform.rotation = originalRotation * xQuaternion * yQuaternion;
+            //}
+            //else
+            //{
+            //    Debug.Log(rotArrayY.Count + ", " + rotArrayX.Count);
+            //    if (rotArrayY.Count == 59 && rotArrayX.Count == 59)
+            //    {
 
-            //Get the rotation you will be at next as a Quaternion
-            Quaternion yQuaternion = Quaternion.AngleAxis(rotAverageY, Vector3.left);
-            Quaternion xQuaternion = Quaternion.AngleAxis(rotAverageX, Vector3.up);
+            //        //Clamp the rotation average to be within a specific value range
+            //        rotationY = ClampAngle(rotationY, minimumY, maximumY);
+            //        rotationX = ClampAngle(rotationX, minimumX, maximumX);
 
-            //Rotate
-            transform.rotation = originalRotation * xQuaternion * yQuaternion;
+            //        //Get the rotation you will be at next as a Quaternion
+            //        Quaternion yQuaternion = Quaternion.AngleAxis(rotationY, Vector3.left);
+            //        Quaternion xQuaternion = Quaternion.AngleAxis(rotationX, Vector3.up);
+            //        //Rotate
+            //        transform.rotation = originalRotation * xQuaternion * yQuaternion;
+            //    }
+            //    else
+            //    {
+            //        Debug.Log("Some");
+            //        //If the arrays length is bigger or equal to the value of frameCounter remove the first value in the array
+            //        if (rotArrayY.Count >= frameCounter)
+            //        {
+            //            rotArrayY.RemoveAt(0);
+            //        }
+            //        if (rotArrayX.Count >= frameCounter)
+            //        {
+            //            rotArrayX.RemoveAt(0);
+            //        }
+
+            //        //Adding up all the rotational input values from each array
+            //        for (int j = 0; j < rotArrayY.Count; j++)
+            //        {
+            //            rotAverageY += rotArrayY[j];
+            //        }
+            //        for (int i = 0; i < rotArrayX.Count; i++)
+            //        {
+            //            rotAverageX += rotArrayX[i];
+            //        }
+
+            //        //Standard maths to find the average
+            //        rotAverageY /= rotArrayY.Count;
+            //        rotAverageX /= rotArrayX.Count;
+
+            //        //Clamp the rotation average to be within a specific value range
+            //        rotAverageY = ClampAngle(rotAverageY, minimumY, maximumY);
+            //        rotAverageX = ClampAngle(rotAverageX, minimumX, maximumX);
+
+            //        //Get the rotation you will be at next as a Quaternion
+            //        Quaternion yQuaternion = Quaternion.AngleAxis(rotAverageY, Vector3.left);
+            //        Quaternion xQuaternion = Quaternion.AngleAxis(rotAverageX, Vector3.up);
+            //        //Rotate
+            //        transform.rotation = originalRotation * xQuaternion * yQuaternion;
+
+            //    }
+            //}
+            
         }
         else if (axes == RotationAxes.MouseX)
         {

@@ -1,29 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
 
 public class UnitBehaviour : MonoBehaviour
 {
-    [SerializeField]
+    
     SquadStats thisSquadStats = null;
 
-    public enum UnitStates { Idle, Moving, Attacking };
+    public enum UnitStates { WaitingToEngage, Moving, Engaging, Attacking };
     UnitStates thisUnitState = UnitStates.Moving;
     Animator thisAnimator = null;
-
+    NavMeshAgent thisAgent = null;
+    GameObject currentTarget = null; // if in combat state, this will be the target that this unit will fight
 
     private void Awake()
     {
         thisAnimator = GetComponent<Animator>();
+        thisAgent = GetComponent<NavMeshAgent>();
     }
     // Start is called before the first frame update
     void Start()
     {
-        
         thisSquadStats = transform.parent.GetComponent<SquadStats>();
         thisSquadStats.AddUnitToSquad(this);
-       
         
     }
 
@@ -32,20 +32,28 @@ public class UnitBehaviour : MonoBehaviour
     {
         
     }
-
+    /// <summary>
+    /// Contains all the death functionality
+    /// </summary>
+    /// <returns></returns>
     IEnumerator  Die() {
-        Debug.Log("unit dies");
-        thisSquadStats.RemoveUnitToSquad(this);
-        transform.parent = null;
+        Debug.Log(gameObject.name + " died");
         thisAnimator.SetTrigger("Death");
-        yield return new WaitForSeconds(5);
-        Destroy(this.gameObject);
+        transform.parent = null;
+        thisSquadStats.RemoveUnitToSquad(this); // remove this unit from the squad   
+        if (thisAgent.enabled) {
+            thisAgent.SetDestination(transform.position);
+        }
+        GetComponent<Collider>().enabled = false;
+        yield return new WaitForSeconds(5); // after 5 seconds
+        Destroy(this.gameObject); // destroy this gameobject
     }
 
     public void SetUnitState(UnitStates state) {
+
         switch (state) {
-            case UnitStates.Idle:
-                MakeTransToIdle();
+            case UnitStates.WaitingToEngage:
+                MakeTransToWaitingForEngage();
                 break;
             case UnitStates.Moving:
                 MakeTransToMoving();
@@ -53,30 +61,39 @@ public class UnitBehaviour : MonoBehaviour
                 case UnitStates.Attacking:
                 MakeTransToAttack();
                 break;
-                //    MakeTransToAttack();
-                //      or
-                //    MakeTransToEnaging
-                //break;
+                case UnitStates.Engaging:
+                MakeTransToEnaging();
+                break;
         }
+        //Debug.Log(gameObject.name + " state set to " + state.ToString());
         thisUnitState = state;
     }
-    private void MakeTransToIdle() {
+    private void MakeTransToWaitingForEngage() {
         thisAnimator.SetTrigger("Idle");
+
     }
-    private void MakeTransToEngage()
+    private void MakeTransToEnaging()
     {
-        // configure units 
-        // Set destination to each target unit
+        thisAgent.enabled = true;
+        thisAgent.SetDestination(currentTarget.transform.position);
     }
     private void MakeTransToAttack()
     { 
         Debug.Log("Attacking");
+        if (this.thisAgent.enabled)
+        {
+            thisAgent.isStopped = true;
+        }
+        transform.LookAt(currentTarget.transform.position);
         thisAnimator.SetTrigger("Attacking");
     }
     private void MakeTransToMoving()
     {
+
         thisAnimator.SetTrigger("Moving");
     }
+    /***************/
+    #region Animation Events
     public void FootR() {
 
     }
@@ -84,12 +101,40 @@ public class UnitBehaviour : MonoBehaviour
     {
 
     }
-    private void OnCollisionEnter(Collision collision)
+    public void Hit() {
+
+    }
+    #endregion
+    /***************/
+    private void OnTriggerEnter(Collider collision)
     {
-        if (collision.transform.tag == "Tower")
+        //Debug.Log(gameObject.name + " collided with "+ collision.gameObject.name );
+        if (currentTarget != null)
         {
-            Debug.Log("Attacking 1");
-            SetUnitState(UnitStates.Attacking);
+            if (collision.transform.gameObject == currentTarget)
+            {
+                Debug.Log("Attacking 1");
+                SetUnitState(UnitStates.Attacking);
+            }
         }
+        else {
+            if (collision.transform.tag == "Unit" && thisUnitState == UnitStates.WaitingToEngage)
+            {
+                string otherSquadTag = collision.transform.parent.tag;
+                if (otherSquadTag.StartsWith("Sq") && otherSquadTag != this.transform.parent.tag)
+                {
+                    currentTarget = collision.gameObject;
+                    SetUnitState(UnitStates.Attacking);
+                }
+            }
+        }
+    }
+   
+    public GameObject GetUnitCurrentTarget() {
+        return currentTarget;
+    }
+    public void SetUnitCurrentTarget(GameObject target)
+    {
+        currentTarget = target;
     }
 }

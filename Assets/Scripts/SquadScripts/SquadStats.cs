@@ -52,12 +52,21 @@ public class SquadStats : MonoBehaviour
     /**************************/
     #region UnitManagement
     /**************************/
+    /// <summary>
+    /// Add a new unit to the squad
+    /// </summary>
+    /// <param name="unit"></param>
     public void AddUnitToSquad(UnitBehaviour unit) {
         squadUnits.Add(unit);
     }
+    /// <summary>
+    /// Remove a unit from the squad
+    /// </summary>
+    /// <param name="unit"></param>
     public void RemoveUnitToSquad(UnitBehaviour unit)
     {
         squadUnits.Remove(unit);
+
         if (squadUnits.Count == 0) {
             Destroy(this.gameObject);
         } 

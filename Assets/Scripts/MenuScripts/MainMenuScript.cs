@@ -28,7 +28,9 @@ public class MainMenuScript : MonoBehaviour
         }   
     }
 
-    
+    /// <summary>
+    /// 
+    /// </summary>
     public void StartGame()
     {
         if (levelDescriptiom != null)

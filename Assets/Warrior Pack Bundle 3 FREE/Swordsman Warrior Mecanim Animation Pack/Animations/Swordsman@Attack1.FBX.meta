@@ -222,14 +222,16 @@ ModelImporter:
       - time: 0.32032853
         functionName: Hit
         data: 
-        objectReferenceParameter: {instanceID: 0}
+        objectReferenceParameter: {fileID: 11500000, guid: 66e6ea9ecf77e934b96d3434767d6afd,
+          type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.56057495
         functionName: Hit
         data: 
-        objectReferenceParameter: {instanceID: 0}
+        objectReferenceParameter: {fileID: 11500000, guid: 66e6ea9ecf77e934b96d3434767d6afd,
+          type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
