@@ -13,10 +13,16 @@ public class InGameMenuScript : MonoBehaviour
     GameObject blackPanel;
     [SerializeField]
     GameObject inGameMenu;
+    [SerializeField]
+    GameObject optionsPanel;
+    Slider sensitivitySlider = null;
     bool panelVisible = false;
+    [SerializeField]
+    CameraMovement cameraMovementScript = null;
     //GameObject playerBoy = null;
     // GameObject playerGirl = null;
     //GameObject[] checkPoint = new GameObject[5];
+    float lastSensitivity = 0.0f;
 
     public static InGameMenuScript GetInstance()
     {
@@ -54,9 +60,13 @@ public class InGameMenuScript : MonoBehaviour
     void Start()
     {
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        sensitivitySlider = optionsPanel.GetComponentInChildren<Slider>();
+        sensitivitySlider.value = cameraMovementScript.GetSensitivity();
+        lastSensitivity = sensitivitySlider.value;
         //PlayerMovement.GetInput = true;
         //playerBoy = GameObject.FindGameObjectWithTag("PlayerBoy");
-       
+
     }
 
     // Update is called once per frame
@@ -68,6 +78,7 @@ public class InGameMenuScript : MonoBehaviour
         {
             if (!panelVisible)
             {
+                Cursor.lockState = CursorLockMode.Confined;
                 Cursor.visible = true;
                 //PlayerMovement.GetInput = false;
                 Time.timeScale = 0;
@@ -77,16 +88,18 @@ public class InGameMenuScript : MonoBehaviour
             else
             {
                 ResumeGame();
-            }
+            } 
         }
     }
     public void ResumeGame()
     {
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         //PlayerMovement.GetInput = true;
         inGameMenu.SetActive(false);
         panelVisible = false;
         Time.timeScale = 1;
+        cameraMovementScript.SetSensitivity(sensitivitySlider.value);
     }
     public void Finish()
     {
@@ -106,7 +119,12 @@ public class InGameMenuScript : MonoBehaviour
         endingPanel.SetActive(false);
         StartCoroutine(LoadNewScene(0));
     }
-
+    public void ShowOptions() {
+        optionsPanel.SetActive(true);
+    }
+    public void CloseOptionsButton() {
+        optionsPanel.SetActive(false);
+    }
     IEnumerator LoadNewScene(int scene)
     {
         blackPanel.SetActive(true);

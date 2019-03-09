@@ -43,11 +43,10 @@ public class ArrowBehaviour : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Unit")
+        if (other.tag == "Body" || other.tag == "Head")
         {
-            UIManager.GetInstance().AddKilledEnemy(); // add a killed enemy to the score
-            other.GetComponent<UnitBehaviour>().StartCoroutine("Die"); // instantly kill the enemy unit
             rb.isKinematic = true; // set kinematic to true to stop movement
+            transform.position = Vector3.MoveTowards(transform.position, transform.position + transform.up * 0.1f, 0.1f);
             transform.parent = other.transform; // so the arrow follows the gameobject that is pinned to
             Destroy(transform.GetComponent<Collider>()); // destroy the collider so there are no other interactions
         }        
@@ -56,8 +55,8 @@ public class ArrowBehaviour : MonoBehaviour
 
         }
         else {
-            rb.isKinematic = true; // set kinematic to true to stop movement
-            transform.parent = other.transform; // so the arrow follows the gameobject that is pinned to
+            transform.position = Vector3.MoveTowards(transform.position, transform.position + transform.up * 0.1f, 0.1f);
+            rb.isKinematic = true; // set kinematic to true to stop movement            
             Destroy(transform.GetComponent<Collider>()); // destroy the collider so there are no other interactions
         }
        

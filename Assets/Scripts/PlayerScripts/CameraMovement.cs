@@ -33,6 +33,7 @@ public class CameraMovement : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        
         originalRotation = transform.rotation;
         camera = GetComponent<Camera>();
     }
@@ -216,5 +217,12 @@ public class CameraMovement : MonoBehaviour {
         else if (!Input.GetMouseButton(1) && camera.fieldOfView < 90) {
             camera.fieldOfView += Time.deltaTime * (zoomSpeed * 1.5f);
         }
+    }
+    public void SetSensitivity(float value) {
+        sensitivityX = value;
+        sensitivityY = value;
+    }
+    public float GetSensitivity() {
+        return sensitivityX;
     }
 }

@@ -9,6 +9,11 @@ TagManager:
   - Tower
   - Sq2
   - Sq1
+  - EnTower
+  - Body
+  - Head
+  - EnSp
+  - PlSp
   layers:
   - Default
   - TransparentFX

@@ -57,19 +57,27 @@ public class SquadStats : MonoBehaviour
     /// </summary>
     /// <param name="unit"></param>
     public void AddUnitToSquad(UnitBehaviour unit) {
-        squadUnits.Add(unit);
+        if (!GetSquadUnits().Contains(unit))
+        {
+            squadUnits.Add(unit);
+        }
     }
     /// <summary>
     /// Remove a unit from the squad
     /// </summary>
     /// <param name="unit"></param>
-    public void RemoveUnitToSquad(UnitBehaviour unit)
+    public void RemoveUnitFromSquad(UnitBehaviour unit)
     {
-        squadUnits.Remove(unit);
+        if (GetSquadUnits().Contains(unit))
+        {
+            squadUnits.Remove(unit);
 
-        if (squadUnits.Count == 0) {
-            Destroy(this.gameObject);
-        } 
+            if (squadUnits.Count == 0 && this != null)
+            {
+                transform.DetachChildren();
+                Destroy(this.gameObject);
+            }
+        }
     }
     #endregion
     /**************************/

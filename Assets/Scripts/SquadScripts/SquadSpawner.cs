@@ -4,30 +4,64 @@ using UnityEngine;
 
 public class SquadSpawner : MonoBehaviour
 {
-    [SerializeField]
+    [SerializeField][Tooltip ("Spawning points")]
     List<Transform> thisPlayerSpawnPoints = new List<Transform>();
-    [SerializeField]
+    [SerializeField][Tooltip("Units will march to this positions")]
     List<Transform> enemyPlayerSpawnPoints = new List<Transform>();
     int spawnPointIndex = 0;
 
     [SerializeField]
     GameObject humanSquadPrefab = null;
-
+    [SerializeField]
+    int numberOfTotalSpawns = 1;
+    int howManyTimesSpawned = 0;
     float timerCounter = 0;
+    [SerializeField][Tooltip("Delay time between spawns")]
     float timeForNextSpawn = 5;
+    [SerializeField][Tooltip("Decrease spawn delay by this amount")]
+    float decreasyTimeForNextSpawnBy = 0.25f;
+    [SerializeField][Tooltip("after this seconds, spawn delay will be decreased")]
+    float afterSeconds = 10f;
+    /// <summary>
+    ///  counts whether the spawn delay should decrease
+    /// </summary>
+    float timeCounterForDecSpawnTime = 0.0f; 
+
+    bool isThisPlayerSpawner = false;
     // Start is called before the first frame update
     void Start()
     {
-     
+        if (tag == "PlSp") {
+            isThisPlayerSpawner = true;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        timerCounter += Time.deltaTime;
-        if (timerCounter > timeForNextSpawn) {
-            SpawnUnit(humanSquadPrefab);
-            timerCounter = 0;
+        if (!isThisPlayerSpawner)
+        {
+            timeCounterForDecSpawnTime += Time.deltaTime;
+            if (timeCounterForDecSpawnTime >= afterSeconds)
+            {
+                timeForNextSpawn -= decreasyTimeForNextSpawnBy;
+                timeCounterForDecSpawnTime = 0.0f;
+            }
+            if (howManyTimesSpawned < numberOfTotalSpawns)
+            {
+                timerCounter += Time.deltaTime;
+                if (timerCounter > timeForNextSpawn)
+                {
+                    SpawnUnit(humanSquadPrefab);
+                    timerCounter = 0;
+                    howManyTimesSpawned++;
+                }
+            }
+        }
+        else {
+            if (Input.GetKeyDown(KeyCode.Alpha1)) {
+                SpawnUnit(humanSquadPrefab);
+            }
         }
     }
     public void SpawnUnit(GameObject unit) {

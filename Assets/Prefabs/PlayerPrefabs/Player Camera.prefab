@@ -99,13 +99,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axes: 0
   zoomSpeed: 20
-  sensitivityX: 5
-  sensitivityY: 5
-  minimumX: -125
-  maximumX: 65
-  minimumY: -30
-  maximumY: 30
-  frameCounter: 60
+  sensitivityX: 3
+  sensitivityY: 3
+  minimumX: -60
+  maximumX: 190
+  minimumY: -65
+  maximumY: 65
+  frameCounter: 20
 --- !u!114 &6820962139016531528
 MonoBehaviour:
   m_ObjectHideFlags: 0

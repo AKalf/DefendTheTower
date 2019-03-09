@@ -20,7 +20,7 @@ public class EnemyReachedTower : MonoBehaviour
     }
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.transform.tag.StartsWith("Sq"))
+        if (collision.transform.tag.StartsWith("Sq2"))
         {
             SquadBehaviour squad = collision.transform.GetComponent<SquadBehaviour>();
             Debug.Log("Squad " + squad.name + " reached tower");
@@ -29,7 +29,14 @@ public class EnemyReachedTower : MonoBehaviour
             }
             // collision.transform.GetComponent<UnitBehaviour>().StartCoroutine("Die");
             squad.SetSquadTarget(towerTransform.gameObject);
+            foreach (UnitBehaviour unit in squad.GetSquadUnits()) {
+                StartCoroutine(KillUnit(unit));
+            }
         }
+    }
+    IEnumerator KillUnit(UnitBehaviour unit) {
+        yield return new WaitForSeconds(12.5f);
+        unit.Die();
     }
    
 }
