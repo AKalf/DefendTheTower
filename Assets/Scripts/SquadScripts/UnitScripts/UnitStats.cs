@@ -31,7 +31,7 @@ public class UnitStats : MonoBehaviour
             health += amount;
             if (health <= 0)
             {
-                thisUnit.Die();
+                thisUnit.SetUnitState(UnitStateDeath.GetInstance());
             }
         }
     }

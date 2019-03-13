@@ -36,7 +36,7 @@ public class EnemyReachedTower : MonoBehaviour
     }
     IEnumerator KillUnit(UnitBehaviour unit) {
         yield return new WaitForSeconds(12.5f);
-        unit.Die();
+        unit.SetUnitState(UnitStateDeath.GetInstance());
     }
    
 }

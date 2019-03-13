@@ -78,7 +78,7 @@ public class ShootingScript : MonoBehaviour
         }
         // if left click is releashed, tell the arrow to addforce and start reloading
         if (Input.GetMouseButtonUp(0)) {
-            arrow.GetComponent<Rigidbody>().isKinematic = false;              
+            arrow.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;          
             arrow.GetComponent<ArrowBehaviour>().ApplyForce(shootPower * ((pullAmount/ maxPullAmount) + 0.05f), 0);
             pullAmount = 0;
             numberOfArrows--; 

@@ -31,8 +31,12 @@ public class SquadSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (tag == "PlSp") {
+        if (tag == "PlSp")
+        {
             isThisPlayerSpawner = true;
+        }
+        else {
+            SpawnUnit(humanSquadPrefab);
         }
     }
 
@@ -67,7 +71,7 @@ public class SquadSpawner : MonoBehaviour
     public void SpawnUnit(GameObject unit) {
         GameObject unitSpawned = Instantiate(unit, thisPlayerSpawnPoints[spawnPointIndex].position, thisPlayerSpawnPoints[spawnPointIndex].rotation);
         unitSpawned.GetComponent<SquadBehaviour>().SetTargetLane(enemyPlayerSpawnPoints[spawnPointIndex].position);
-
+        unitSpawned.transform.LookAt(enemyPlayerSpawnPoints[spawnPointIndex].position);
         spawnPointIndex++;
         if (spawnPointIndex > thisPlayerSpawnPoints.Count-1) {
             spawnPointIndex = 0;

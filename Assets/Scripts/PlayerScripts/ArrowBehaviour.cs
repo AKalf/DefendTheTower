@@ -18,7 +18,7 @@ public class ArrowBehaviour : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.isKinematic = true;
+        rb.constraints = RigidbodyConstraints.FreezeAll;
     }
 
     // Update is called once per frame
@@ -45,9 +45,10 @@ public class ArrowBehaviour : MonoBehaviour
     {
         if (other.tag == "Body" || other.tag == "Head")
         {
-            rb.isKinematic = true; // set kinematic to true to stop movement
-            transform.position = Vector3.MoveTowards(transform.position, transform.position + transform.up * 0.1f, 0.1f);
+            rb.constraints = RigidbodyConstraints.FreezeAll; // set kinematic to true to stop movement
+            transform.position = other.ClosestPointOnBounds(transform.position);
             transform.parent = other.transform; // so the arrow follows the gameobject that is pinned to
+            
             Destroy(transform.GetComponent<Collider>()); // destroy the collider so there are no other interactions
         }        
         else if (other.isTrigger)
@@ -56,7 +57,7 @@ public class ArrowBehaviour : MonoBehaviour
         }
         else {
             transform.position = Vector3.MoveTowards(transform.position, transform.position + transform.up * 0.1f, 0.1f);
-            rb.isKinematic = true; // set kinematic to true to stop movement            
+            rb.constraints = RigidbodyConstraints.FreezeAll; // set kinematic to true to stop movement            
             Destroy(transform.GetComponent<Collider>()); // destroy the collider so there are no other interactions
         }
        

@@ -98,14 +98,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   axes: 0
-  zoomSpeed: 20
+  zoomSpeed: 75
   sensitivityX: 3
   sensitivityY: 3
   minimumX: -60
   maximumX: 190
   minimumY: -65
   maximumY: 65
-  frameCounter: 20
+  frameCounter: 10
 --- !u!114 &6820962139016531528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,9 +118,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cccc55c459494694883d724b352ed1e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootPower: 100
+  shootPower: 75
   reloadTime: 0.5
-  pullSpeed: 200
+  pullSpeed: 225
   maxPullAmount: 300
   arrowPrefab: {fileID: 7839221330636143690, guid: 6cab295bc2624db40b5e61f428bc5a0f,
     type: 3}
