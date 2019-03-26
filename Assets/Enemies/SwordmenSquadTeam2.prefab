@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 320fdc259fbac1d48abf9b74ba2e0689, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arrowDmgDealt: 5
+  arrowDmgDealt: 2
 --- !u!54 &5210624479895485695
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -133,7 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 320fdc259fbac1d48abf9b74ba2e0689, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arrowDmgDealt: 5
+  arrowDmgDealt: 2
 --- !u!54 &2269552170290737269
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -401,9 +401,9 @@ BoxCollider:
   m_GameObject: {fileID: 3966131810147672603}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 20, y: 5, z: 5}
+  m_Size: {x: 10, y: 5, z: 5}
   m_Center: {x: 0, y: 1, z: 2}
 --- !u!54 &5279186104328593883
 Rigidbody:
@@ -655,7 +655,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 320fdc259fbac1d48abf9b74ba2e0689, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arrowDmgDealt: 5
+  arrowDmgDealt: 2
 --- !u!54 &1194764677216280102
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -730,7 +730,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 320fdc259fbac1d48abf9b74ba2e0689, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arrowDmgDealt: 5
+  arrowDmgDealt: 2
 --- !u!54 &2919808606446181741
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -43,7 +43,7 @@ public class ArrowBehaviour : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Body" || other.tag == "Head")
+        if (other.tag.StartsWith("Bo") || other.tag.StartsWith("He"))
         {
             rb.constraints = RigidbodyConstraints.FreezeAll; // set kinematic to true to stop movement
             transform.position = other.ClosestPointOnBounds(transform.position);

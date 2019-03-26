@@ -6,15 +6,12 @@ public class UIManager : MonoBehaviour
 {
 
     [SerializeField]
-    Text pullAmountText;
-
-    [SerializeField]
     Text enemiesKilledText = null;
     [SerializeField]
-    Text enemiesPassedText = null;
+    Text arrowsShotText = null;
 
     int enemiesKilled = 0;
-    int enemiesPassed = 0;
+    int arrowsShot = 0;
 
 
     static UIManager thisInstance = null;
@@ -39,9 +36,7 @@ public class UIManager : MonoBehaviour
     {
         
     }
-    public void SetPullAmountText(float amount) {
-        pullAmountText.text = "Pull amount" + amount.ToString();
-    }
+    
     public static UIManager GetInstance() {
         return thisInstance;
     }
@@ -52,7 +47,7 @@ public class UIManager : MonoBehaviour
     }
     public void AddPassedEnemy()
     {
-        enemiesPassed++;
-        enemiesPassedText.text = "Enemies passed:" + enemiesPassed.ToString();
+        arrowsShot++;
+        arrowsShotText.text = "Arrows shot: " + arrowsShot.ToString();
     }
 }

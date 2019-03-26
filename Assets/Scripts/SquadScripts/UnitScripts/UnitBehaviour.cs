@@ -99,8 +99,12 @@ public class UnitBehaviour : MonoBehaviour
     public void Hit() {
         if (currentTarget != null) {
             UnitStats enemyUnitStats = currentTarget.GetComponent<UnitStats>();
-            if (enemyUnitStats != null) {
+            if (enemyUnitStats != null)
+            {
                 enemyUnitStats.ChangeHealthByAmount(-thisUnitStats.GetDamage());
+            }
+            else if (currentTarget.GetComponent<StructureStatsScript>() != null) {
+                currentTarget.GetComponent<StructureStatsScript>().ChangeHealthByAmount(-thisUnitStats.GetDamage());
             }
         }
     }

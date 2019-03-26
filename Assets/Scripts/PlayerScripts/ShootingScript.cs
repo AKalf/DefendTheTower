@@ -14,7 +14,7 @@ public class ShootingScript : MonoBehaviour
     [SerializeField][Tooltip ("How fast will the shooting power will be increased when holding left click")]
     float pullSpeed = 0.1f;
     [SerializeField][Tooltip("How much extra shooting power can be added when pulling")]
-    float maxPullAmount = 10;
+    int maxPullAmount = 10;
     [SerializeField][Tooltip("The prefab to shoot")]
     GameObject arrowPrefab;
     [SerializeField][Tooltip("Where at the bow arrows should spawn")]
@@ -26,18 +26,26 @@ public class ShootingScript : MonoBehaviour
 
     GameObject arrow; // variable that holds the new created arrows
     bool reloaded = false; 
-    float pullAmount = 0; // how much is the string of the arrow currently pulled
+    int pullAmount = 0; // how much is the string of the arrow currently pulled
     float timeSinceShot = 0; // counts the time scince the last shot
+
+    private void Start()
+    {
+        GUIManager.GetInstance().SetMaxMana(maxPullAmount);
+    }
 
     private void Update()
     {
-        
-        if (!reloaded)
+        if (numberOfArrows > 0)
         {
-            ReloadArrow();
-        }
-        else if (numberOfArrows > 0) {
-            ShootLogic();
+            if (!reloaded)
+            {
+                ReloadArrow();
+            }
+            else
+            {
+                ShootLogic();
+            }
         }
        
     }
@@ -65,24 +73,31 @@ public class ShootingScript : MonoBehaviour
     }
 
     void ShootLogic() {
+        
         // if pull amount gets more than allowed set it to max
         if (pullAmount > maxPullAmount) {
             pullAmount = maxPullAmount;
-            UIManager.GetInstance().SetPullAmountText(pullAmount); // inform the GUIManager to change the U.I element
+            GUIManager.GetInstance().InformPlayerManaSlider(pullAmount); // inform the GUIManager to change the U.I element
         }
         // if left click is pressed, increase pull amount
-        if (Input.GetMouseButton(0) && pullAmount < maxPullAmount) {
-
-            pullAmount += Time.deltaTime * pullSpeed;
-            UIManager.GetInstance().SetPullAmountText(pullAmount); // inform the GUIManager to change the U.I element
+        if (Input.GetMouseButton(0) && pullAmount <= maxPullAmount) {
+            int newPullAmount = (int)(Time.deltaTime * pullSpeed);
+            if ((int)newPullAmount + pullAmount > pullAmount)
+            {
+                pullAmount += (int)newPullAmount;
+                GUIManager.GetInstance().InformPlayerManaSlider(pullAmount); // inform the GUIManager to change the U.I element
+            }
         }
         // if left click is releashed, tell the arrow to addforce and start reloading
         if (Input.GetMouseButtonUp(0)) {
             arrow.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;          
-            arrow.GetComponent<ArrowBehaviour>().ApplyForce(shootPower * ((pullAmount/ maxPullAmount) + 0.05f), 0);
+            arrow.GetComponent<ArrowBehaviour>().ApplyForce(shootPower * ((pullAmount/ maxPullAmount) + 0.01f), 0);
             pullAmount = 0;
+            GUIManager.GetInstance().InformPlayerManaSlider(pullAmount);
+            UIManager.GetInstance().AddPassedEnemy();
             numberOfArrows--; 
             reloaded = false;
         }
+        
     }
 }

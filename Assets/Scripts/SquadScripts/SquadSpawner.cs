@@ -63,7 +63,12 @@ public class SquadSpawner : MonoBehaviour
             }
         }
         else {
-            if (Input.GetKeyDown(KeyCode.Alpha1)) {
+            if (Input.GetKeyDown(KeyCode.Alpha1) && CoinManager.GetInstance().GetTotalCoins() >= CoinManager.GetInstance().GetHumanSquadCost())
+            {
+                SpawnUnit(humanSquadPrefab);
+                CoinManager.GetInstance().ChangeTotalCoinsByAmount(-CoinManager.GetInstance().GetHumanSquadCost());
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha0)) {
                 SpawnUnit(humanSquadPrefab);
             }
         }

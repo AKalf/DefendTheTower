@@ -61,31 +61,32 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\ArrowCollChecker.cs" />
-    <Compile Include="Assets\Scripts\DemoScripts\EnemyReachedTower.cs" />
     <Compile Include="Assets\Scripts\DemoScripts\OnTowerColl.cs" />
     <Compile Include="Assets\Scripts\DemoScripts\UIManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\CoinManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\GUIManager.cs" />
+    <Compile Include="Assets\Scripts\MenuScripts\ArrowDamageManager.cs" />
     <Compile Include="Assets\Scripts\MenuScripts\InGameMenuScript.cs" />
     <Compile Include="Assets\Scripts\MenuScripts\MainMenuScript.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\ArrowBehaviour.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\CameraMovement.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\ShootingScript.cs" />
-    <Compile Include="Assets\Scripts\SquadScripts\FightConfig.cs" />
     <Compile Include="Assets\Scripts\SquadScripts\SquadBehaviour.cs" />
     <Compile Include="Assets\Scripts\SquadScripts\SquadManager.cs" />
     <Compile Include="Assets\Scripts\SquadScripts\SquadSpawner.cs" />
     <Compile Include="Assets\Scripts\SquadScripts\SquadStats.cs" />
-    <Compile Include="Assets\Scripts\SquadScripts\UnitScripts\IUnitStates.cs" />
     <Compile Include="Assets\Scripts\SquadScripts\UnitScripts\UnitBehaviour.cs" />
-    <Compile Include="Assets\Scripts\SquadScripts\UnitScripts\UnitStateAttacking.cs" />
-    <Compile Include="Assets\Scripts\SquadScripts\UnitScripts\UnitStateDeath.cs" />
-    <Compile Include="Assets\Scripts\SquadScripts\UnitScripts\UnitStateEngaging.cs" />
-    <Compile Include="Assets\Scripts\SquadScripts\UnitScripts\UnitStateFormation.cs" />
-    <Compile Include="Assets\Scripts\SquadScripts\UnitScripts\UnitStateIdle.cs" />
-    <Compile Include="Assets\Scripts\SquadScripts\UnitScripts\UnitStateMoving.cs" />
+    <Compile Include="Assets\Scripts\SquadScripts\UnitScripts\UnitStates\IUnitStates.cs" />
+    <Compile Include="Assets\Scripts\SquadScripts\UnitScripts\UnitStates\UnitStateAttacking.cs" />
+    <Compile Include="Assets\Scripts\SquadScripts\UnitScripts\UnitStates\UnitStateDeath.cs" />
+    <Compile Include="Assets\Scripts\SquadScripts\UnitScripts\UnitStates\UnitStateEngaging.cs" />
+    <Compile Include="Assets\Scripts\SquadScripts\UnitScripts\UnitStates\UnitStateFormation.cs" />
+    <Compile Include="Assets\Scripts\SquadScripts\UnitScripts\UnitStates\UnitStateIdle.cs" />
+    <Compile Include="Assets\Scripts\SquadScripts\UnitScripts\UnitStates\UnitStateMoving.cs" />
+    <Compile Include="Assets\Scripts\SquadScripts\UnitScripts\UnitStates\UnitStateWaitingForEngage.cs" />
     <Compile Include="Assets\Scripts\SquadScripts\UnitScripts\UnitStatesManager.cs" />
     <Compile Include="Assets\Scripts\SquadScripts\UnitScripts\UnitStats.cs" />
-    <Compile Include="Assets\Scripts\SquadScripts\UnitStateWaitingForEngage.cs" />
-    <Compile Include="Assets\Scripts\TowerScripts\TowerStatsScript.cs" />
+    <Compile Include="Assets\Scripts\TowerScripts\StructureStatsScript.cs" />
     <Compile Include="Assets\ShowSliderValue.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>F:/Unity/Projects/DTT V.0.1/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>

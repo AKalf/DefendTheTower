@@ -10,10 +10,14 @@ public class UnitStats : MonoBehaviour
     [SerializeField]
     int damage = 1;
 
+    bool isPlayerUnit = false;
     UnitBehaviour thisUnit = null;
     // Start is called before the first frame update
     void Start()
     {
+        if (transform.parent.tag == "Sq1") {
+            isPlayerUnit = true;
+        }
         thisUnit = GetComponent<UnitBehaviour>();
     }
 
@@ -32,10 +36,17 @@ public class UnitStats : MonoBehaviour
             if (health <= 0)
             {
                 thisUnit.SetUnitState(UnitStateDeath.GetInstance());
+                if (!GetIfPlayerUnit())
+                {
+                    CoinManager.GetInstance().ChangeTotalCoinsByAmount(CoinManager.GetInstance().GetPlayerUnitKillValue());
+                }
             }
         }
     }
     public int GetDamage() {
         return damage;
+    }
+    public bool GetIfPlayerUnit() {
+        return isPlayerUnit;
     }
 }

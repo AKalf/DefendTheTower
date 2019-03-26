@@ -120,8 +120,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootPower: 75
   reloadTime: 0.5
-  pullSpeed: 225
-  maxPullAmount: 300
+  pullSpeed: 110
+  maxPullAmount: 10
   arrowPrefab: {fileID: 7839221330636143690, guid: 6cab295bc2624db40b5e61f428bc5a0f,
     type: 3}
   arrowPoint: {fileID: 6820962138959639104}
@@ -150,7 +150,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6820962138959639104}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0.7071068, w: 0}
-  m_LocalPosition: {x: 0, y: -0.124, z: 0.489}
+  m_LocalPosition: {x: 0.004000671, y: -0.092, z: 1.113}
   m_LocalScale: {x: 0.005, y: 0.005, z: 0.005}
   m_Children: []
   m_Father: {fileID: 6820962138504079399}
@@ -173,7 +173,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e918021cf87fa7d43af7e3886422aa77, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.06
+      value: 0.031
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e918021cf87fa7d43af7e3886422aa77, type: 3}
       propertyPath: m_LocalPosition.y

@@ -22,6 +22,7 @@ public class SquadBehaviour : MonoBehaviour
     void Start()
     {
         thisSquadStats = GetComponent<SquadStats>();
+      
         init = true;
     }
 
@@ -98,39 +99,44 @@ public class SquadBehaviour : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag.StartsWith("Sq") && other.tag != this.tag) {
+        if (other.tag.StartsWith("Sq") && other.tag != this.tag)
+        {
             if (GetSquadState() == SquadStates.Moving)
             {
                 SquadBehaviour enemySquad = other.GetComponent<SquadBehaviour>();
                 if (enemySquad.GetSquadState() == SquadStates.Moving && enemySquad != enemyTargetedSquad)
                 {
                     enemyTargetedSquad = enemySquad;
-                    
+
                     Debug.Log(gameObject.name + ": EnemySquad collided");
-                    // if this is Enemy squad 
                     if (this.tag == "Sq2")
                     {
-                        if (enemySquad.GetSquadUnits().Count <= this.GetSquadUnits().Count)
-                        {
+                       // if (enemySquad.GetSquadUnits().Count <= this.GetSquadUnits().Count)
+                       // {
                             SetSquadTargets(enemySquad.GetSquadUnits());
                             SetSquadState(this, SquadStates.Engaging);
-                            enemySquad.SetSquadState(this, SquadStates.WaitingToEngage);
-                            
-                        }
-                    }
-                    else if (this.tag == "Sq1")
-                    {
-                        if (this.GetSquadUnits().Count > enemySquad.GetSquadUnits().Count)
-                        {
-                            SetSquadTargets(enemySquad.GetSquadUnits());
-                            SetSquadState(this, SquadStates.Engaging);
-                            enemySquad.SetSquadState(this, SquadStates.WaitingToEngage);
-                            
-                        }
+                            enemySquad.SetSquadState(this, SquadStates.Engaging);
 
+                       // }
                     }
+                    //else if (this.tag == "Sq1")
+                    //{
+                    //    if (this.GetSquadUnits().Count > enemySquad.GetSquadUnits().Count)
+                    //    {
+                    //        SetSquadTargets(enemySquad.GetSquadUnits());
+                    //        SetSquadState(this, SquadStates.Engaging);
+                    //        enemySquad.SetSquadState(this, SquadStates.WaitingToEngage);
+
+                    //    }
+
+                    //}
                 }
             }
+        }
+        else if (other.tag.StartsWith("pG") && this.tag.EndsWith("2"))
+        {
+            SetSquadTarget(other.gameObject);
+            SetSquadState(this, SquadStates.Engaging);
         }
     }
     /// <summary>
@@ -151,11 +157,7 @@ public class SquadBehaviour : MonoBehaviour
     public void SetSquadTarget(GameObject target) {       
         // for each unit in squad, active the navMeshAgen Comp. and set the unit's target
         foreach (UnitBehaviour unit in GetSquadUnits()) {
-            NavMeshAgent unitNavMesh = unit.GetComponent<NavMeshAgent>();
-            if (unitNavMesh != null)
-            {
-                unit.SetUnitCurrentTarget(target);                          
-            }
+            unit.SetUnitCurrentTarget(target);                                  
         }
         
     }
@@ -165,6 +167,7 @@ public class SquadBehaviour : MonoBehaviour
     /// <param name="targets"></param>
     public void SetSquadTargets(List<GameObject> targets)
     {
+        
         int index = 0;
         // for each unit in the squad
         foreach (UnitBehaviour unit in GetSquadUnits())
@@ -173,17 +176,17 @@ public class SquadBehaviour : MonoBehaviour
             NavMeshAgent unitNavMesh = unit.GetComponent<NavMeshAgent>();
             // if exists
             if (unitNavMesh != null)
-            {               
+            {
                 unit.SetUnitCurrentTarget(targets[index]);
-                unitNavMesh.enabled = true;
                 index++;
             }
             // if index is bigger or equal to the number of targets, reset and count from start (thus targets will be assigned to multiple units) 
-            if (index >= targets.Count) {
+            if (index >= targets.Count)
+            {
                 index = 0;
             }
         }
-        
+ 
     }
     /// <summary>
     /// Set multiple units as targets for this squad's units.
@@ -192,19 +195,43 @@ public class SquadBehaviour : MonoBehaviour
     public void SetSquadTargets(List<UnitBehaviour> targets)
     {
         int index = 0;
-        foreach (UnitBehaviour unit in GetSquadUnits())
+        if (GetSquadUnits().Count >= targets.Count)
         {
-            NavMeshAgent unitNavMesh = unit.GetComponent<NavMeshAgent>();
-            if (unitNavMesh != null)
-            {              
-                unit.SetUnitCurrentTarget(targets[index].gameObject);
-                targets[index].SetUnitCurrentTarget(unit.gameObject);
-                unitNavMesh.enabled = true;
-                index++;
-            }
-            if (index >= targets.Count)
+            foreach (UnitBehaviour unit in GetSquadUnits())
             {
-                index = 0;
+                NavMeshAgent unitNavMesh = unit.GetComponent<NavMeshAgent>();
+                if (unitNavMesh != null)
+                {
+                    unit.SetUnitCurrentTarget(targets[index].gameObject);
+                    targets[index].SetUnitCurrentTarget(unit.gameObject);
+                    index++;
+                }
+                if (index >= targets.Count)
+                {
+                    index = 0;
+                }
+            }
+        }
+        else {
+            bool allEnemyUnitsHaveTarget = false;
+            foreach (UnitBehaviour unit in targets)
+            {
+                NavMeshAgent unitNavMesh = unit.GetComponent<NavMeshAgent>();
+                
+                if (unitNavMesh != null)
+                {
+                    unit.SetUnitCurrentTarget(GetSquadUnits()[index].gameObject);
+                    if (!allEnemyUnitsHaveTarget)
+                    {
+                        GetSquadUnits()[index].SetUnitCurrentTarget(unit.gameObject);
+                    }
+                    index++;
+                }
+                if (index >= GetSquadUnits().Count)
+                {
+                    allEnemyUnitsHaveTarget = true;
+                    index = 0;
+                }
             }
         }
         
@@ -231,4 +258,5 @@ public class SquadBehaviour : MonoBehaviour
         
         return null;
     }
+   
 }
