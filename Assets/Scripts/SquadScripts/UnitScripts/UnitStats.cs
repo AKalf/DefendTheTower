@@ -12,13 +12,16 @@ public class UnitStats : MonoBehaviour
 
     bool isPlayerUnit = false;
     UnitBehaviour thisUnit = null;
+    public enum UnitRace { Human, Elf, Dwarf }
+    [SerializeField]
+    UnitRace thisUnitRace;
     // Start is called before the first frame update
     void Start()
     {
         if (transform.parent.tag == "Sq1") {
             isPlayerUnit = true;
         }
-        thisUnit = GetComponent<UnitBehaviour>();
+        thisUnit = this.gameObject.AddComponent<UnitBehaviour>();
     }
 
     // Update is called once per frame
@@ -48,5 +51,11 @@ public class UnitStats : MonoBehaviour
     }
     public bool GetIfPlayerUnit() {
         return isPlayerUnit;
+    }
+    public void SetUnitRace(UnitRace race) {
+        thisUnitRace = race;
+    }
+    public UnitRace GetRace() {
+        return thisUnitRace;
     }
 }

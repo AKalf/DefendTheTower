@@ -25,6 +25,7 @@ public class ShootingScript : MonoBehaviour
  
 
     GameObject arrow; // variable that holds the new created arrows
+    AudioSource stringSource = null;
     bool reloaded = false; 
     int pullAmount = 0; // how much is the string of the arrow currently pulled
     float timeSinceShot = 0; // counts the time scince the last shot
@@ -32,6 +33,7 @@ public class ShootingScript : MonoBehaviour
     private void Start()
     {
         GUIManager.GetInstance().SetMaxMana(maxPullAmount);
+        stringSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -75,29 +77,30 @@ public class ShootingScript : MonoBehaviour
     void ShootLogic() {
         
         // if pull amount gets more than allowed set it to max
-        if (pullAmount > maxPullAmount) {
-            pullAmount = maxPullAmount;
-            GUIManager.GetInstance().InformPlayerManaSlider(pullAmount); // inform the GUIManager to change the U.I element
+        if (pullAmount > maxPullAmount + 1) {
+            pullAmount = maxPullAmount + 1;           
         }
         // if left click is pressed, increase pull amount
         if (Input.GetMouseButton(0) && pullAmount <= maxPullAmount) {
-            int newPullAmount = (int)(Time.deltaTime * pullSpeed);
-            if ((int)newPullAmount + pullAmount > pullAmount)
-            {
-                pullAmount += (int)newPullAmount;
-                GUIManager.GetInstance().InformPlayerManaSlider(pullAmount); // inform the GUIManager to change the U.I element
+            if (!stringSource.isPlaying) {
+                stringSource.Play();
             }
+            int newPullAmount = (int)(Time.deltaTime * pullSpeed);            
+            pullAmount += (int)newPullAmount;       
         }
         // if left click is releashed, tell the arrow to addforce and start reloading
         if (Input.GetMouseButtonUp(0)) {
+            if (stringSource.isPlaying)
+            {
+                stringSource.Stop();
+            }
             arrow.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;          
             arrow.GetComponent<ArrowBehaviour>().ApplyForce(shootPower * ((pullAmount/ maxPullAmount) + 0.01f), 0);
             pullAmount = 0;
-            GUIManager.GetInstance().InformPlayerManaSlider(pullAmount);
             UIManager.GetInstance().AddPassedEnemy();
             numberOfArrows--; 
             reloaded = false;
         }
-        
+        GUIManager.GetInstance().InformPlayerManaSlider(pullAmount); // inform the GUIManager to change the U.I element
     }
 }

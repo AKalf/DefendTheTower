@@ -21,7 +21,7 @@ public class UnitStateAttacking : IUnitStates
     }
     public void OnStateEntry(UnitBehaviour unit)
     {
-        unit.transform.LookAt(unit.GetComponent<UnityEngine.AI.NavMeshAgent>().destination);
+        unit.transform.LookAt(unit.GetUnitCurrentTarget().transform.position);
         unit.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
         unit.GetComponent<Animator>().SetBool("Attacking", true);
     }
@@ -34,19 +34,23 @@ public class UnitStateAttacking : IUnitStates
     public void OnStateUpdate(UnitBehaviour unit)
     {
         UnitBehaviour enemyUnit = unit.GetUnitCurrentTarget().GetComponent<UnitBehaviour>();
-        if (enemyUnit != null) {
-            if (enemyUnit.GetCurrentState() == UnitStateDeath.GetInstance()) {
+        if (enemyUnit != null)
+        {
+            if (enemyUnit.GetCurrentState() == UnitStateDeath.GetInstance())
+            {
                 UnitBehaviour newTarget = unit.GetThisUnitSquad().RequestForUnitTarget();
                 if (newTarget != null)
                 {
                     unit.SetUnitCurrentTarget(newTarget.gameObject);
                     unit.SetUnitState(UnitStateEngaging.GetInstance());
                 }
-                else {
+                else
+                {
                     unit.SetUnitState(UnitStateFormation.GetInstance());
                 }
             }
         }
+        
     }
 
 }

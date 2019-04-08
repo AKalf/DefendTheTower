@@ -16,13 +16,14 @@ public class InGameMenuScript : MonoBehaviour
     [SerializeField]
     GameObject optionsPanel;
     Slider sensitivitySlider = null;
+    Text sensitivityText = null;
     bool panelVisible = false;
     [SerializeField]
     CameraMovement cameraMovementScript = null;
     //GameObject playerBoy = null;
     // GameObject playerGirl = null;
     //GameObject[] checkPoint = new GameObject[5];
-    float lastSensitivity = 0.0f;
+
 
     public static InGameMenuScript GetInstance()
     {
@@ -63,10 +64,11 @@ public class InGameMenuScript : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         sensitivitySlider = optionsPanel.GetComponentInChildren<Slider>();
         sensitivitySlider.value = cameraMovementScript.GetSensitivity();
-        lastSensitivity = sensitivitySlider.value;
+        sensitivityText = sensitivitySlider.GetComponentInChildren<Text>();
+        sensitivityText.text = sensitivitySlider.value.ToString();
         //PlayerMovement.GetInput = true;
         //playerBoy = GameObject.FindGameObjectWithTag("PlayerBoy");
-
+        
     }
 
     // Update is called once per frame
@@ -90,6 +92,9 @@ public class InGameMenuScript : MonoBehaviour
                 ResumeGame();
             } 
         }
+        if (optionsPanel.activeInHierarchy) {
+            cameraMovementScript.SetSensitivity(sensitivitySlider.value);
+        }
     }
     public void ResumeGame()
     {
@@ -99,7 +104,7 @@ public class InGameMenuScript : MonoBehaviour
         inGameMenu.SetActive(false);
         panelVisible = false;
         Time.timeScale = 1;
-        cameraMovementScript.SetSensitivity(sensitivitySlider.value);
+        
     }
     public void Finish()
     {
@@ -143,6 +148,9 @@ public class InGameMenuScript : MonoBehaviour
         }
 
 
+    }
+    public void SetSensitivityText(float value) {
+        sensitivityText.text = ((int)(sensitivitySlider.value)).ToString();
     }
     /*
     private void Cheats()

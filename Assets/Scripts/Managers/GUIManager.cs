@@ -26,7 +26,7 @@ public class GUIManager : MonoBehaviour
     [SerializeField]
     Text LevelText = null;
 
-  
+      
     //[SerializeField]
     //Image loosePanel = null; // loose window
 

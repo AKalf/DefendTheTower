@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
 public class SquadStats : MonoBehaviour
 {
     [SerializeField]
@@ -11,14 +11,20 @@ public class SquadStats : MonoBehaviour
     [SerializeField]
     int attackDamage;
 
+    Vector3 targetLanePos = Vector3.zero;
+    NavMeshAgent thisAgent = null;
     // holds the units that belong to this squad
     List<UnitBehaviour> squadUnits = new List<UnitBehaviour>();
 
+    private void Awake()
+    {
+        
 
+    }
     // Start is called before the first frame update
     void Start()
     {
-        
+        this.gameObject.AddComponent<SquadBehaviour>();
     }
 
     // Update is called once per frame
@@ -38,6 +44,13 @@ public class SquadStats : MonoBehaviour
     {
         return squadUnits;
     }
+    public NavMeshAgent GetAgent() {
+        return thisAgent;
+    }
+    public Vector3 GetTargetLane() {
+        return targetLanePos;
+    }
+
     // ..speed()
 
     // ..health()
@@ -81,4 +94,11 @@ public class SquadStats : MonoBehaviour
     }
     #endregion
     /**************************/
+    public void SetTargetLane(Vector3 pos)
+    {
+        targetLanePos = pos;
+        thisAgent = this.gameObject.AddComponent<NavMeshAgent>();
+        thisAgent.SetDestination(targetLanePos);
+        
+    }
 }

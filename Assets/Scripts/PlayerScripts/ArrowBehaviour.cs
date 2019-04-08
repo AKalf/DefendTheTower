@@ -13,12 +13,14 @@ public class ArrowBehaviour : MonoBehaviour
 
     Rigidbody rb = null;
     Transform arrowPosOnBow = null;
+    AudioSource audioSource = null;
     bool hasShot = false;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeAll;
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -34,6 +36,7 @@ public class ArrowBehaviour : MonoBehaviour
     /// <param name="upwardsForce" (not used)></param>
     public void ApplyForce(float shootPower, float upwardsForce)
     {
+        MessageDispatch.GetInstance().SendAudioMessageForDispatch(AudioManager.SoundClipPrefab.Arrow_Release, audioSource);
         // add force. The vectors are wrong because our current model has been exported with vectore.up actually being the forward vector
         rb.AddForce(transform.up /* + trans.forward * upwardsForce) */ * shootPower , ForceMode.Impulse);
         // remove parent 
@@ -58,6 +61,7 @@ public class ArrowBehaviour : MonoBehaviour
         else {
             transform.position = Vector3.MoveTowards(transform.position, transform.position + transform.up * 0.1f, 0.1f);
             rb.constraints = RigidbodyConstraints.FreezeAll; // set kinematic to true to stop movement            
+            MessageDispatch.GetInstance().SendAudioMessageForDispatch(AudioManager.SoundClipPrefab.Arrow_Hit_Target, audioSource);
             Destroy(transform.GetComponent<Collider>()); // destroy the collider so there are no other interactions
         }
        

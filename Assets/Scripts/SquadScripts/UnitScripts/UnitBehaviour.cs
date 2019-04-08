@@ -13,7 +13,7 @@ public class UnitBehaviour : MonoBehaviour
 
     
     public string currentStateToString ;
-    IUnitStates thisUnitState = null;
+    IUnitStates thisUnitState;
    
     /// <summary>
     /// The initial relative position to the parent.
@@ -21,13 +21,10 @@ public class UnitBehaviour : MonoBehaviour
     Transform initTransform = null;
     [SerializeField]
     GameObject currentTarget = null; // if in combat state, this will be the target that this unit will fight
-
+    AudioSource source = null;
 
     float timeDoingFormation = 0.0f;
-    private void Awake()
-    {
-       
-    }
+   
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +37,8 @@ public class UnitBehaviour : MonoBehaviour
         initialTransform.transform.position = transform.position;
         initialTransform.transform.parent = transform.parent;
         initTransform = initialTransform.transform;
+
+        source = gameObject.AddComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -59,7 +58,7 @@ public class UnitBehaviour : MonoBehaviour
    /// <param name="timeOffset">offset unit death event triggers</param>
    /// <returns></returns>
     public IEnumerator  OnDeath(float timeDelay) {
-        yield return new WaitForSeconds(5); // after 5 seconds
+        yield return new WaitForSeconds(timeDelay); 
         if (this != null)
         {
             Destroy(this.gameObject); // destroy this gameobject
@@ -89,15 +88,61 @@ public class UnitBehaviour : MonoBehaviour
     
     /***************/
     #region Animation Events
-    public void FootR() {
+    public void Move() {
+        switch (thisUnitStats.GetRace())
+        {
+            case UnitStats.UnitRace.Human:
+                if (source.clip == AudioManager.GetInstance().Cannon_Wheels && source.isPlaying)
+                {
+
+                }
+                else
+                {
+                    source.loop = true;
+                    MessageDispatch.GetInstance().SendAudioMessageForDispatch(AudioManager.SoundClipPrefab.Human_FootSteps, source);
+                }
+                break;
+            case UnitStats.UnitRace.Elf:
+                if (source.clip == AudioManager.GetInstance().Cannon_Wheels && source.isPlaying)
+                {
+
+                }
+                else
+                {
+                    source.loop = true;
+                    MessageDispatch.GetInstance().SendAudioMessageForDispatch(AudioManager.SoundClipPrefab.Horse_Footsteps, source);
+                }
+                break;
+            case UnitStats.UnitRace.Dwarf:
+                if (source.clip == AudioManager.GetInstance().Cannon_Wheels && source.isPlaying)
+                {
+
+                }
+                else
+                {
+                    source.loop = true;
+                    MessageDispatch.GetInstance().SendAudioMessageForDispatch(AudioManager.SoundClipPrefab.Cannon_Wheels, source);
+                }
+
+                break;
+        }
 
     }
-    public void FootL()
-    {
-
-    }
+    
     public void Hit() {
         if (currentTarget != null) {
+            float rnd = 0.5f;
+            if (thisUnitStats.GetRace() == UnitStats.UnitRace.Dwarf && thisSquad.GetEnemyTargetedSquad() != null) {
+                int enemiesCount = thisSquad.GetEnemyTargetedSquad().GetSquadUnits().Count;
+                SquadBehaviour enemySquad = thisSquad.GetEnemyTargetedSquad();
+                for (int x = 0; x != enemiesCount; x++) {
+                    if (!(enemySquad.GetSquadUnits()[x].GetUnitStats().GetRace() == UnitStats.UnitRace.Elf)) {
+
+                        StartCoroutine(FireCannon(enemySquad.GetSquadUnits()[x], Random.Range(rnd, x/1.5f)));
+                    }
+                }
+                return;
+            }
             UnitStats enemyUnitStats = currentTarget.GetComponent<UnitStats>();
             if (enemyUnitStats != null)
             {
@@ -128,5 +173,13 @@ public class UnitBehaviour : MonoBehaviour
     public SquadBehaviour GetThisUnitSquad() {
         return thisSquad;
 
+    }
+    public UnitStats GetUnitStats() {
+        return thisUnitStats;
+    }
+    IEnumerator FireCannon(UnitBehaviour unit, float offset) {
+       
+        yield return new WaitForSeconds(offset);
+        unit.GetUnitStats().ChangeHealthByAmount(-thisUnitStats.GetDamage());
     }
 }

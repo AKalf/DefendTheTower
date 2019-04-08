@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 public class UnitStateEngaging : IUnitStates
 {
-    [SerializeField]
+
     static float distanceToStartAttacking = 1.2f;
+
 
     static UnitStateEngaging inst = null;
     public static UnitStateEngaging GetInstance()
@@ -21,6 +22,7 @@ public class UnitStateEngaging : IUnitStates
     }
     public void OnStateEntry(UnitBehaviour unit)
     {
+        
         unit.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = true;
         if (unit.GetUnitCurrentTarget().tag.EndsWith("te"))
         {
@@ -41,7 +43,15 @@ public class UnitStateEngaging : IUnitStates
     public void OnStateUpdate(UnitBehaviour unit)
     {
         if (unit.GetUnitCurrentTarget() != null)
-        { 
+        {
+            if (unit.GetUnitStats().GetRace() == UnitStats.UnitRace.Dwarf)
+            {
+                if (Vector3.Distance(unit.transform.position, unit.GetUnitCurrentTarget().transform.position) <= 50)
+                {
+                    unit.SetUnitState(UnitStateAttacking.GetInstance());
+                }
+                return;
+            }
             UnitBehaviour enemyUnit = unit.GetUnitCurrentTarget().GetComponent<UnitBehaviour>();
             if (enemyUnit != null)
             {

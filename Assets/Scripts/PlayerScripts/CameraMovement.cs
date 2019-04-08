@@ -29,13 +29,13 @@ public class CameraMovement : MonoBehaviour {
     public float frameCounter = 60;
     Quaternion originalRotation;
 
-    Camera camera;
+    Camera playerCamera;
 
     // Use this for initialization
     void Start () {
         
         originalRotation = transform.rotation;
-        camera = GetComponent<Camera>();
+        playerCamera = GetComponent<Camera>();
     }
 	
 	// Update is called once per frame
@@ -96,62 +96,7 @@ public class CameraMovement : MonoBehaviour {
                 Quaternion xQuaternion = Quaternion.AngleAxis(rotAverageX, Vector3.up);
                 //Rotate
                 transform.rotation = originalRotation * xQuaternion * yQuaternion;
-            //}
-            //else
-            //{
-            //    Debug.Log(rotArrayY.Count + ", " + rotArrayX.Count);
-            //    if (rotArrayY.Count == 59 && rotArrayX.Count == 59)
-            //    {
-
-            //        //Clamp the rotation average to be within a specific value range
-            //        rotationY = ClampAngle(rotationY, minimumY, maximumY);
-            //        rotationX = ClampAngle(rotationX, minimumX, maximumX);
-
-            //        //Get the rotation you will be at next as a Quaternion
-            //        Quaternion yQuaternion = Quaternion.AngleAxis(rotationY, Vector3.left);
-            //        Quaternion xQuaternion = Quaternion.AngleAxis(rotationX, Vector3.up);
-            //        //Rotate
-            //        transform.rotation = originalRotation * xQuaternion * yQuaternion;
-            //    }
-            //    else
-            //    {
-            //        Debug.Log("Some");
-            //        //If the arrays length is bigger or equal to the value of frameCounter remove the first value in the array
-            //        if (rotArrayY.Count >= frameCounter)
-            //        {
-            //            rotArrayY.RemoveAt(0);
-            //        }
-            //        if (rotArrayX.Count >= frameCounter)
-            //        {
-            //            rotArrayX.RemoveAt(0);
-            //        }
-
-            //        //Adding up all the rotational input values from each array
-            //        for (int j = 0; j < rotArrayY.Count; j++)
-            //        {
-            //            rotAverageY += rotArrayY[j];
-            //        }
-            //        for (int i = 0; i < rotArrayX.Count; i++)
-            //        {
-            //            rotAverageX += rotArrayX[i];
-            //        }
-
-            //        //Standard maths to find the average
-            //        rotAverageY /= rotArrayY.Count;
-            //        rotAverageX /= rotArrayX.Count;
-
-            //        //Clamp the rotation average to be within a specific value range
-            //        rotAverageY = ClampAngle(rotAverageY, minimumY, maximumY);
-            //        rotAverageX = ClampAngle(rotAverageX, minimumX, maximumX);
-
-            //        //Get the rotation you will be at next as a Quaternion
-            //        Quaternion yQuaternion = Quaternion.AngleAxis(rotAverageY, Vector3.left);
-            //        Quaternion xQuaternion = Quaternion.AngleAxis(rotAverageX, Vector3.up);
-            //        //Rotate
-            //        transform.rotation = originalRotation * xQuaternion * yQuaternion;
-
-            //    }
-            //}
+           
             
         }
         else if (axes == RotationAxes.MouseX)
@@ -210,17 +155,18 @@ public class CameraMovement : MonoBehaviour {
         return Mathf.Clamp(angle, min, max);
     }
     private void Zoom() {
-        if (Input.GetMouseButton(1) && camera.fieldOfView > 45)
+        if (Input.GetMouseButton(1) && playerCamera.fieldOfView > 45)
         {
-            camera.fieldOfView -= Time.deltaTime * zoomSpeed;
+            playerCamera.fieldOfView -= Time.deltaTime * zoomSpeed;
         }
-        else if (!Input.GetMouseButton(1) && camera.fieldOfView < 90) {
-            camera.fieldOfView += Time.deltaTime * (zoomSpeed * 1.5f);
+        else if (!Input.GetMouseButton(1) && playerCamera.fieldOfView < 90) {
+            playerCamera.fieldOfView += Time.deltaTime * (zoomSpeed * 1.5f);
         }
     }
     public void SetSensitivity(float value) {
         sensitivityX = value;
         sensitivityY = value;
+        InGameMenuScript.GetInstance().SetSensitivityText(value);
     }
     public float GetSensitivity() {
         return sensitivityX;
